@@ -1,17 +1,16 @@
 import React from 'react'
+import { Routes, Route } from 'react-router-dom'
 
-import { useGetUsersQuery } from '../../services/usersApi/users.api'
 import { User } from './../User'
-import { UsersContainer } from './App.styles'
+import { Users } from '../Users'
 
 export const App = () => {
-  const { data } = useGetUsersQuery()
-
   return (
-    <UsersContainer>
-      {data?.map((user) => (
-        <User user={user} key={user.id} />
-      ))}
-    </UsersContainer>
+    <>
+      <Routes>
+        <Route path={`/`} element={<Users />}></Route>
+        <Route path={`users/:login`} element={<User />} />
+      </Routes>
+    </>
   )
 }
