@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
 import { colors } from './../../constants/colors'
 
@@ -65,5 +66,20 @@ export const SubLinkCompanies = styled.a`
   :hover {
     text-decoration: underline;
     color: ${colors.GRAY_100};
+  }
+`
+
+export const Back = styled(NavLink)`
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  color: ${colors.GRAY_100};
+  cursor: pointer;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid ${colors.GRAY_400};
+  :hover {
+    color: ${colors.WHITE};
   }
 `

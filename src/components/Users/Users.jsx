@@ -1,15 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { PER_PAGE } from './../../constants/query-params'
 import { useGetUsersMutation } from '../../services/usersApi/users.api'
 import { UserPreview } from './UserPreview'
-import { CustomPaginate, UsersContainer } from './Users.styles'
+import { UsersContainer, Loading } from './Users.styles'
+import { Pagination } from '../Pagination/Pagination'
+import { ButtonScrollToTop } from '../ButtonScrollToTop'
 
 export const Users = () => {
-  const [getUsers, { data }] = useGetUsersMutation()
+  const [getUsers, { data, isLoading }] = useGetUsersMutation()
+
+  const [page, setPage] = useState(0)
 
   const handlePageChange = (e) => {
     getUsers({ per_page: PER_PAGE, since: e.selected * PER_PAGE })
+    setPage(e.selected)
   }
 
   useEffect(() => {
@@ -18,23 +23,23 @@ export const Users = () => {
 
   return (
     <UsersContainer>
-      <CustomPaginate
-        breakLabel="..."
-        nextLabel=" > "
-        pageRangeDisplayed={4}
-        onPageChange={(e) => handlePageChange(e)}
-        previousLabel=" < "
-        previousClassName="page previous"
-        nextClassName="page next"
-        pageCount={100}
-        renderOnZeroPageCount={null}
-        pageClassName="page"
-        activeClassName="page-active"
-        breakClassName="page break"
-      />
-      {data?.map((user) => (
-        <UserPreview user={user} key={user.id} />
-      ))}
+      <ButtonScrollToTop />
+      <Pagination onPageChange={handlePageChange} forcePage={page} />
+      {isLoading ? (
+        <Loading
+          type="spinningBubbles"
+          color="white"
+          height={667}
+          width={375}
+        />
+      ) : (
+        <>
+          {data?.map((user) => (
+            <UserPreview user={user} key={user.id} />
+          ))}
+          <Pagination onPageChange={handlePageChange} forcePage={page} />
+        </>
+      )}
     </UsersContainer>
   )
 }

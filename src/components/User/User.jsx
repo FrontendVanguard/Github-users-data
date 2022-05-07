@@ -13,6 +13,7 @@ import {
   MinText,
   Companies,
   SubLinkCompanies,
+  Back,
 } from './User.styles'
 import { Image } from './../Image'
 
@@ -21,8 +22,10 @@ export const User = () => {
   const { data } = useGetUserQuery(login)
   const created_date = new Date(data?.created_at)
   const companies = data?.company?.split(',')
+
   return (
     <Content>
+      <Back to="/"> ← Back</Back>
       <UserContainer>
         <Image url={data?.avatar_url} width={296} height={296} />
         <MajorText>{data?.name}</MajorText>
@@ -38,7 +41,7 @@ export const User = () => {
               <SubLinkCompanies key={nanoid()}> {_company} </SubLinkCompanies>
             ))}
           </Companies>
-          <SubText>Location: {data?.location}</SubText>
+          {data?.location && <SubText>Location: {data?.location}</SubText>}
           <SubLink href={data?.email}>{data?.email}</SubLink>
           <SubLink href={data?.blog}>{data?.blog}</SubLink>
         </AdditionalInformation>
