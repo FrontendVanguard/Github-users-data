@@ -10,6 +10,7 @@ export const Image = ({ url, width = 100, height = 100, isRound = true }) => {
       height={height}
       alt={url}
       isRound={isRound}
+      loading="lazy"
     />
   )
 }
