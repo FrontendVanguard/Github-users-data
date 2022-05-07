@@ -4,9 +4,9 @@ export const usersApi = createApi({
   reducerPath: 'usersApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.github.com' }),
   endpoints: (builder) => ({
-    getUsers: builder.query({
-      query: () => ({
-        url: '/users',
+    getUsers: builder.mutation({
+      query: ({ per_page, since }) => ({
+        url: `/users?per_page=${per_page}&since=${since}`,
       }),
     }),
     getUser: builder.query({
@@ -17,4 +17,4 @@ export const usersApi = createApi({
   }),
 })
 
-export const { useGetUsersQuery, useGetUserQuery } = usersApi
+export const { useGetUsersMutation, useGetUserQuery } = usersApi

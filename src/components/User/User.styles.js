@@ -37,6 +37,12 @@ export const SubLink = styled.a`
   cursor: pointer;
   font-size: 22px;
   line-height: 2;
+  text-decoration: none;
+  color: ${colors.GRAY_100};
+  :hover {
+    text-decoration: underline;
+    color: ${colors.BLUE_300};
+  }
 `
 
 export const MinText = styled.span`

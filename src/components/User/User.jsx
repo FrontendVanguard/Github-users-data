@@ -20,13 +20,11 @@ export const User = () => {
   const { login } = useParams()
   const { data } = useGetUserQuery(login)
   const created_date = new Date(data?.created_at)
-
   const companies = data?.company?.split(',')
-  console.log(companies)
   return (
     <Content>
       <UserContainer>
-        <Image url={data?.avatar_url} width={260} height={260} />
+        <Image url={data?.avatar_url} width={296} height={296} />
         <MajorText>{data?.name}</MajorText>
         <AdditionalInformation>
           <SubText>{data?.bio}</SubText>
@@ -37,10 +35,10 @@ export const User = () => {
           <SubText>Created at: {created_date.toDateString()}</SubText>
           <Companies>
             {companies?.map((_company) => (
-              <SubLinkCompanies key={nanoid()}>{_company} </SubLinkCompanies>
+              <SubLinkCompanies key={nanoid()}> {_company} </SubLinkCompanies>
             ))}
           </Companies>
-          <SubText>{data?.location}</SubText>
+          <SubText>Location: {data?.location}</SubText>
           <SubLink href={data?.email}>{data?.email}</SubLink>
           <SubLink href={data?.blog}>{data?.blog}</SubLink>
         </AdditionalInformation>
@@ -48,18 +46,3 @@ export const User = () => {
     </Content>
   )
 }
-
-/* const {
-    /name,
-
-    /followers,
-    /following,
-    created_at,
-
-    /location,
-    /company,
-    links:
-     / email,
-     / blog,
- 
-  } = data */

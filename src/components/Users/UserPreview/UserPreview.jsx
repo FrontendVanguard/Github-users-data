@@ -2,11 +2,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Image } from '../../Image'
-import { UserContainer, SubText } from './UserPreview.styles'
+import { UserContainer, SubText, TextLink } from './UserPreview.styles'
 
 export const UserPreview = ({ user }) => {
   const navigate = useNavigate()
-  const { login, html_url, avatar_url, id } = user
+  const { login, html_url, avatar_url } = user
 
   const handleClick = () => {
     navigate(`users/${login}`)
@@ -17,9 +17,9 @@ export const UserPreview = ({ user }) => {
       <SubText>Login: {login}</SubText>
       <SubText>
         Profile Link:{' '}
-        <a href={html_url} onClick={(e) => e.stopPropagation()}>
+        <TextLink href={html_url} onClick={(e) => e.stopPropagation()}>
           {html_url}
-        </a>
+        </TextLink>
       </SubText>
     </UserContainer>
   )

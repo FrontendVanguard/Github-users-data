@@ -21,3 +21,12 @@ export const UserContainer = styled.div`
 export const SubText = styled.span`
   font-size: 22px;
 `
+
+export const TextLink = styled.a`
+  text-decoration: none;
+  color: ${colors.GRAY_100};
+  :hover {
+    text-decoration: underline;
+    color: ${colors.BLUE_300};
+  }
+`
